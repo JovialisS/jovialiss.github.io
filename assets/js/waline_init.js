@@ -6,7 +6,7 @@ import { init } from 'https://cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline
 init({
     el: '#waline',
     serverURL: 'https://jovially.netlify.app/.netlify/functions/comment',
-    comment: true,
+    comment: false,
     reaction: true,
     search: false,
     pageview: true, 
