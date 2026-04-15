@@ -110,7 +110,7 @@ toc: true
 
 comments:
   # Global switch for the post-comment system. Keeping it empty means disabled.
-  provider: waline # [disqus | utterances | giscus]
+  # provider: waline # [disqus | utterances | giscus]
   # active: true
   # The provider options are as follows:
   disqus:
@@ -254,7 +254,7 @@ jekyll_compose:
       math: false        # 【数学公式】设为 true，支持渲染 $$ ... $$ 公式
       mermaid: false     # 【流程图】设为 true，支持渲染 ```mermaid 代码块
       toc: true          # 【目录】设为 true，文章右侧显示目录 (TOC)
-      comments: true     # 【评论】设为 true，开启评论区 (需先配置好评论插件)
+      comments: false     # 【评论】设为 true，开启评论区 (需先配置好评论插件)
 
       # ================= 3. 图片与媒体 (Chirpy 特色) =================
       # image:
