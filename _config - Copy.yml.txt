@@ -154,7 +154,7 @@ paginate: 10
 # The base URL of your site
 baseurl: ""
 
-background_animation : true # Enable the background animation effect
+backgroud_animation : true # Enable the background animation effect
 
 csp:
   enabled: true
@@ -272,3 +272,13 @@ jekyll_compose:
       # ================= 5. 高级/特殊设置 =================
       published: true      # 设为 false 则变成草稿，不会构建到网站上
       # permalink: /custom/  # 自定义文章链接 (覆盖默认的日期链接)
+
+
+plugins:
+  - jekyll-minifier
+
+# 压缩插件配置
+jekyll-minifier:
+  exclude: ['node_modules/**/*', 'vendor/**/*'] # 排除不需要压缩的目录
+  uglifier_args:
+    harmony: true # 重要：开启 harmony 才能正确压缩现代 JavaScript (ES6+)，否则可能报错
