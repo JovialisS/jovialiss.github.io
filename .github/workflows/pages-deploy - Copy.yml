@@ -46,7 +46,7 @@ jobs:
       # 2. 正确地告诉 Bundler 跳过 ssl 验证，同时把安装源设为不严格校验
       - name: Configure Bundler & Install Gems
         run: |
-          bundle config set --global ssl_verify_mode 0
+          gem update --system
           bundle install --jobs 1
 
       - name: Build site
