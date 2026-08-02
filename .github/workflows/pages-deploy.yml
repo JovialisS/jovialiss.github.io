@@ -43,6 +43,9 @@ jobs:
         with:
           ruby-version: 3.3
           bundler-cache: true
+        env:
+          # 补充指定标准 CA 证书路径，双重保险
+          SSL_CERT_FILE: /etc/ssl/certs/ca-certificates.crt
 
       - name: Build site
         run: bundle exec jekyll b -d "_site${{ steps.pages.outputs.base_path }}"
