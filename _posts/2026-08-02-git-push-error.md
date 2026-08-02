@@ -35,7 +35,7 @@ description: 维护博客时出现的各种问题。
 
 ### GitHub  action 报错提示 
 
-    > Could not fetch specs from https://gems.ruby-china.com/ due to underlying error
+> Could not fetch specs from https://gems.ruby-china.com/ due to underlying error
     <SSL_connect returned=1 errno=0 peeraddr=104.26.6.173:443 state=error: sslv3
     alert handshake failure (SSL alert number 40)
     (https://gems.ruby-china.com/specs.4.8.gz)>
