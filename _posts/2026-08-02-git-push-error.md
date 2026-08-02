@@ -48,7 +48,7 @@ description: 维护博客时出现的各种问题。
 
 然把硬编码的国内源写在 Gemfile 中其实是一种反模式（Anti-pattern），会导致非国内开发者或海外 CI 持续集成环境出现问题。
 
-### 解决方法：
+### 解决方法
 
 - 将 Gemfile 第一行直接改回官方源 source 'https://rubygems.org'
 
