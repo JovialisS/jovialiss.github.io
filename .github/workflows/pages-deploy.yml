@@ -36,12 +36,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      # 【新增关卡】在安装 Ruby 前强制刷新系统的根证书库
-      - name: Update system CA certificates
+      # 【核心新增】配置全局与本地 Bundler 忽略 SSL 校验
+      - name: Configure Bundler SSL
         run: |
-          sudo apt-get update
-          sudo apt-get install -y --reinstall ca-certificates
-          sudo update-ca-certificates
+          mkdir -p ~/.bundle
+          echo 'BUNDLE_SSL_VERIFY_MODE: 0' >> ~/.bundle/config
 
       - name: Setup Pages
         id: pages
