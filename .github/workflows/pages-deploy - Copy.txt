@@ -22,6 +22,9 @@ concurrency:
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  # 升级到全局环境变量，强制后续所有步骤（包括 bundler）生效
+  SSL_CERT_FILE: /etc/ssl/certs/ca-certificates.crt
+  SSL_CERT_DIR: /etc/ssl/certs
 
 jobs:
   build:
@@ -33,22 +36,25 @@ jobs:
         with:
           fetch-depth: 0
 
+      # 【核心新增】配置全局与本地 Bundler 忽略 SSL 校验
+      - name: Configure Bundler SSL
+        run: |
+          mkdir -p ~/.bundle
+          echo 'BUNDLE_SSL_VERIFY_MODE: 0' >> ~/.bundle/config
+
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
 
-      # 1. 设置 Ruby 环境，暂时不使用它的自动 cache 功能，避免带入破坏性的旧文件
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.3
-
-      # 2. 正确地告诉 Bundler 跳过 ssl 验证，同时把安装源设为不严格校验
-      - name: Configure Bundler & Install Gems
-        run: |
-          bundle config set --global ssl_verify_mode 0
-          bundle install --jobs 1
-
+          bundler-cache: false
+      
+      - name: Install dependencies
+        run: bundle install --jobs 1 # 2. 强制单线程安装，防止并发解压冲突
+        
       - name: Build site
         run: bundle exec jekyll b -d "_site${{ steps.pages.outputs.base_path }}"
         env:
