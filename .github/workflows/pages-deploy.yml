@@ -50,8 +50,11 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.3
-          bundler-cache: true
-
+          bundler-cache: false
+      
+      - name: Install dependencies
+        run: bundle install --jobs 1 # 2. 强制单线程安装，防止并发解压冲突
+        
       - name: Build site
         run: bundle exec jekyll b -d "_site${{ steps.pages.outputs.base_path }}"
         env:
