@@ -3,7 +3,7 @@ layout: post
 title: PromptEngineering
 date: 2026-07-28 03:33 +0800
 description : 初见AI
-published: false
+# published: false
 ---
 
 ### 角色设定
