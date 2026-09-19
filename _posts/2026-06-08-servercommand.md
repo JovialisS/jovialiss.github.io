@@ -28,13 +28,14 @@ pin: true
 ### 参数 | Parameters
 #### 特有参数 | Specific Parameters
 
-|Windows|Linux|
-|--|---|
-|-b 显示创建连接的可执行文件路径(需管理员权限)|-t  仅显示 TCP 连接|
-|-e 显示以太网统计信息（收发字节数、数据包数）|-u 仅显示 UDP 连接|
-|-f 显示外部地址的完全限定域名（FQDN）|-l 仅显示监听（LISTEN）状态的端口|
-|-y 显示所有 TCP 连接|-i 显示网络接口统计信息|
-|Interval 用数字直接指定刷新间隔（如 netstat 5 每 5 秒刷新）|-c 持续刷新（按 Ctrl+C 停止）|
+
+| Windows | Linux |
+| ------- | -------- |
+| -b 显示创建连接的可执行文件路径(需管理员权限) |-t  仅显示 TCP 连接|
+| -e 显示以太网统计信息（收发字节数、数据包数） |-u 仅显示 UDP 连接|
+| -f 显示外部地址的完全限定域名（FQDN）|-l 仅显示监听（LISTEN）状态的端口|
+| -y 显示所有 TCP 连接 |-i 显示网络接口统计信息|
+| Interval 用数字直接指定刷新间隔（如 netstat 5 每 5 秒刷新）|-c 持续刷新（按 Ctrl+C 停止）|
 
 #### 基本参数 | Basic Parameters
 
