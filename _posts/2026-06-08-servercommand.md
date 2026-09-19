@@ -27,6 +27,7 @@ pin: true
 
 ### 参数 | Parameters
 #### 特有参数 | Specific Parameters
+
 |Windows|Linux|
 |--|---|
 |-b 显示创建连接的可执行文件路径(需管理员权限)|-t  仅显示 TCP 连接|
@@ -54,12 +55,11 @@ pin: true
 ![Parameter](assets/fodder/netstat.webp)
 
 
-### Remarks | 备表
+### 备表 | Remarks
 
 | Parameter      | Description         |
 | -------    | -------      |
-| State           | Indicates the state of a TCP connection, including:<br>CLOSE_WAIT: 对端关了，但本地程序没有 close ( 常见于程序 bug ) .<br>CLOSED:	初始状态，无连接存在.<br>ESTABLISHED: 三次握手完成，连接已建立，双方可正常双向传输数据(全双工).<br>FIN_WAIT_1: 发出 FIN 后等待 ACK，极短暂；若堆积说明对端无响应（网络问题或对端宕机）.<br>FIN_WAIT_2: 收到 ACK 后等待对端 FIN；若大量堆积，说明对端应用有 Bug，未正常关闭连接.<br>LAST_ACK: 发出自己的 FIN 后等待最终 ACK，极短暂.<br>LISTEN: 在监听的端口，等待连接.<br>SYN_RECEIVED: 服务端收到 SYN 并回复 SYN+ACK 后，等待客户端的最终 ACK.<br>SYN_SEND: 客户端发送 SYN 包后，等待服务端回复 SYN+ACK.<br>TIMED_WAIT: 连接关闭后的等待释放 (常见，通常正常) .<br>TIME_WAIT：主动关闭方收到对方 FIN 并发送 ACK 后进入，持续 2MSL（Linux 默认 60 秒），确保对方收到 ACK 且旧报文在网络中消亡。<br>CLOSE_WAIT：被动关闭方收到 FIN 并回复 ACK 后进入，等待应用层调用 close()。如果堆积，说明应用代码有 Bug（忘记关闭连接）。
-CLOSING：双方几乎同时发送 FIN 时出现的罕见状态。|
+| State           | Indicates the state of a TCP connection, including:<br>CLOSE_WAIT: 对端关了，但本地程序没有 close ( 常见于程序 bug ) .<br>CLOSED:	初始状态，无连接存在.<br>ESTABLISHED: 三次握手完成，连接已建立，双方可正常双向传输数据(全双工).<br>FIN_WAIT_1: 发出 FIN 后等待 ACK，极短暂；若堆积说明对端无响应（网络问题或对端宕机）.<br>FIN_WAIT_2: 收到 ACK 后等待对端 FIN；若大量堆积，说明对端应用有 Bug，未正常关闭连接.<br>LAST_ACK: 发出自己的 FIN 后等待最终 ACK，极短暂.<br>LISTEN: 在监听的端口，等待连接.<br>SYN_RECEIVED: 服务端收到 SYN 并回复 SYN+ACK 后，等待客户端的最终 ACK.<br>SYN_SEND: 客户端发送 SYN 包后，等待服务端回复 SYN+ACK.<br>TIMED_WAIT: 连接关闭后的等待释放 (常见，通常正常) .<br>TIME_WAIT：主动关闭方收到对方 FIN 并发送 ACK 后进入，持续 2MSL（Linux 默认 60 秒），确保对方收到 ACK 且旧报文在网络中消亡。<br>CLOSE_WAIT：被动关闭方收到 FIN 并回复 ACK 后进入，等待应用层调用 close()。如果堆积，说明应用代码有 Bug（忘记关闭连接）。<br>CLOSING：双方几乎同时发送 FIN 时出现的罕见状态。|
 | Proto    | The name of the protocol (TCP or UDP).    |
 | Local address   | The IP address of the local computer and the port number being used. The name of the local computer that corresponds to the IP address and the name of the port is shown unless the -n parameter is specified. If the port is not yet established, the port number is shown as an asterisk (*).  |
 | Foreign address   | The IP address and port number of the remote computer to which the socket is connected. The names that corresponds to the IP address and the port are shown unless the -n parameter is specified. If the port is not yet established, the port number is shown as an asterisk (*).    |
