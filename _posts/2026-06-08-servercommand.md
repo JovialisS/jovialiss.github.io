@@ -53,7 +53,7 @@ pin: true
 |interval|持续监控。等同于Linux下的-c。每隔 interval 秒重新显示所选信息。按 CTRL+C 停止重新显示。如果省略此参数，此命令将仅输出所选信息一次。|
 
 
-![Parameter](assets/fodder/netstat.webp)
+<!-- ![Parameter](assets/fodder/netstat.webp) -->
 
 
 ### 备表 | Remarks
