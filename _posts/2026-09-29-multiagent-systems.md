@@ -87,7 +87,7 @@ categories: [Technology, Tools]
 
 
 
- ## 参考资料 | Sources
+## 参考资料 | Sources
 
 
 - [**Patterns and problems in emerging multiAgent systems, 2026 · Aug 13**](https://www.anthropic.com/research/multiAgent-systems).
