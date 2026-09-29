@@ -65,4 +65,10 @@ pin: true
 | Local address   | The IP address of the local computer and the port number being used. The name of the local computer that corresponds to the IP address and the name of the port is shown unless the -n parameter is specified. If the port is not yet established, the port number is shown as an asterisk (*).  |
 | Foreign address   | The IP address and port number of the remote computer to which the socket is connected. The names that corresponds to the IP address and the port are shown unless the -n parameter is specified. If the port is not yet established, the port number is shown as an asterisk (*).    |
 
+## mstsc
 
+### 远程连接指定主机
+
+``
+mstsc /admin /v:ip
+``
