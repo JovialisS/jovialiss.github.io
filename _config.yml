@@ -22,7 +22,7 @@ description: >- # used by seo meta and the atom feed
 
 # Fill in the protocol & hostname for your site.
 # E.g. 'https://username.github.io', note that it does not end with a '/'.
-url: "https://github.com/JovialisS/jovialiss.github.io"
+url: "https://jovial.js.cool"
 
 # github:
 #   username: github_username # change to your GitHub username
@@ -38,7 +38,7 @@ social:
   fediverse_handle: "@you@domain.com" # change to your fediverse handle or leave empty
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/username # change to your Twitter homepage
+    # - https://twitter.com/username # change to your Twitter homepage
     - https://github.com/username # change to your GitHub homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
@@ -96,7 +96,7 @@ theme_mode: # [light | dark]
 #
 # e.g. 'https://cdn.com'
 cdn:   # string, the CDN endpoint url
-img_cdn: "https://cdn.jsdelivr.net/gh/JovialisS/jovialiss.github.io@main"
+# img_cdn: "https://cdn.jsdelivr.net/gh/JovialisS/jovialiss.github.io@main"  # 已停用：jsDelivr 国内慢，图片改走本站同源
 
 # the avatar on sidebar, support local or CORS resources
 avatar: "/assets/img/favicons/avatar.webp"
@@ -110,7 +110,7 @@ toc: true
 
 comments:
   # Global switch for the post-comment system. Keeping it empty means disabled.
-  provider: waline # [disqus | utterances | giscus]
+  provider:  # [disqus | utterances | giscus]
   # active: true
   # The provider options are as follows:
   disqus:
@@ -134,13 +134,13 @@ comments:
 # Self-hosted static assets, optional › https://github.com/cotes2020/chirpy-static-assets
 assets:
   self_host:
-    enabled: # boolean, keep empty means false
+    enabled: true # boolean, keep empty means false
     # specify the Jekyll environment, empty means both
     # only works if `assets.self_host.enabled` is 'true'
     env: # [development | production]
 
 pwa:
-  enabled: true # The option for PWA feature (installable)
+  enabled: false # The option for PWA feature (installable)
   cache:
     enabled: true # The option for PWA offline cache
     # Paths defined here will be excluded from the PWA cache.
@@ -154,14 +154,13 @@ paginate: 10
 # The base URL of your site
 baseurl: ""
 
-background_animation : true # Enable the background animation effect
+background_animation : false # Enable the background animation effect
 
 csp:
   enabled: true
   # ... 其他设置 ...
   script_src:
     - "https://cdn.jsdelivr.net"
-    - "https://instant.page"  # <--- 加上这一行！
 
 # ------------ The following options are not recommended to be modified ------------------
 
