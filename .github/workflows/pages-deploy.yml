@@ -35,6 +35,12 @@ jobs:
           fetch-depth: 0
           submodules: true # 拉取 assets/lib（chirpy-static-assets）
 
+      - name: Verify static assets
+        run: |
+          git submodule status
+          git submodule update --init --recursive
+          ls assets/lib/dayjs
+
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5 # 升级到 v5
