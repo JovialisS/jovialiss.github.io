@@ -2,7 +2,7 @@
 layout: post
 title: iOS File System
 date: 2026-10-19 10:55 +0800
-description: IOS 文件系统
+description: iOS 文件系统
 tags: [iOS]
 categories: [Technology, Tools]
 ---
