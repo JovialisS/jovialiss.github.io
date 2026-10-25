@@ -8,67 +8,166 @@ categories: [Technology, Tools]
 pin: true
 ---
 
-## 修改终端文字大小
+## **修改终端文字大小**
 
 **sudo dpkg-reconfigure console-setup**
 
-## netstat
+---
 
-### 常用命令
+## **netstat**
 
-
-|- ano | Linux<br>所有/监听: a/l <br>TCP/UDP: t/u <br>-anp:带pid的所有连接|通过pid查进程连接的目标IP. |
-|-------|-------|---|
-|-r|查路由表。=linux in -rn|用于排查:<br>默认网关是否正确<br>路由是否被错误配置<br>某个网段是否可达|
-|-s|输出<br>TCP 重传次数、<br>UDP 错误计数<br>ICMP 错误计数<br>丢包统计等|适合排查<br>网络不稳定<br>TCP 重传异常<br>系统网络栈是否出现异常|
+### **参数 | Parameters**
 
 
+#### **端口与连接排查 | Port & Connection Inspection**
+
+| 排查需求 | Linux | Windows |
+| :--- | :--- | :--- |
+| **查端口占用**<br>*(最常用)* | `netstat -tunlp`<br>• 列出监听中的服务<br>• 附带 PID 与程序名 | `netstat -ano`<br>• 列出监听端口与连接<br>• 附带进程 PID |
+| **查所有活跃连接** | `netstat -anp`<br>• 分析全部连接（含 ESTABLISHED 等） | `netstat -ano`<br>• 输出全部状态的连接列表 |
+| **定位程序路径**<br>*(溯源进程)* | *(Linux 需根据 PID 查)*<br>`ls -l /proc/<PID>/exe` | `netstat -anob`<br>• 直接输出 exe 可执行文件路径<br>• 需以管理员身份运行 |
+| **持续动态监控** | `netstat -c -tunlp`<br>• 类似 `top`，每秒自动刷新 | `netstat -ano 5`<br>• 尾部加秒数，每 5 秒刷新一次 |
 
 
-### 参数 | Parameters
-#### 特有参数 | Specific Parameters
+>  **重要区别**：
+> * 在 **Linux** 下查看进程 PID 请用 **`-p`**；
+> * 在 **Windows** 下查看进程 PID 请用 **`-o`**（Windows 的 `-p` 作用是按协议筛选，如 `netstat -p tcp`）。
+{: .prompt-tip }
 
 
-| Windows | Linux |
-| ------- | -------- |
-| -b 显示创建连接的可执行文件路径(需管理员权限) |-t  仅显示 TCP 连接|
-| -e 显示以太网统计信息（收发字节数、数据包数） |-u 仅显示 UDP 连接|
-| -f 显示外部地址的完全限定域名（FQDN）|-l 仅显示监听（LISTEN）状态的端口|
-| -y 显示所有 TCP 连接 |-i 显示网络接口统计信息|
-| Interval 用数字直接指定刷新间隔（如 netstat 5 每 5 秒刷新）|-c 持续刷新（按 Ctrl+C 停止）|
 
-#### 基本参数 | Basic Parameters
+#### **通用全局网络诊断 | Global Network Diagnostics**
 
-| Parameter      | Description         |
-| -------    | -------      |
-| -a | 	显示所有活动的TCP连接及正在监听的TCP和UDP端口。|
-|-b|显示创建每个连接或监听端口所涉及的可执行文件。在某些情况下，知名可执行文件会托管多个独立组件，此时将显示参与创建连接或监听端口的组件序列。这种情况下，可执行文件名位于底部的[]中，顶部是其调用的组件，依此类推，直到TCP/IP协议层。请注意，此操作可能耗时较长，并且除非您拥有足够权限，否则会执行失败。|
-|-e|显示以太网统计信息，如发送和接收的字节数及数据包数量。可与 -s 结合使用。|
-|-n|显示活动的 TCP 连接，但地址和端口号以数字形式表示，且不会尝试解析名称。|
-|-o|显示活动的 TCP 连接，并包含每个连接的进程 ID (PID)。可与 -a、-n 和 -p 组合使用。|
-|-p|显示指定协议的连接情况。其中，协议(Protocol)可以是 tcp、udp、tcpv6 或 udpv6。若将此参数与 -s 一起使用以按协议显示统计信息，则协议可以是 tcp、udp、icmp、ip、tcpv6、udpv6、icmpv6 或 ipv6。|
-|-q|显示所有连接、监听端口以及已绑定但未监听的TCP端口。已绑定但未监听的端口可能与活动连接有关，也可能无关。|
-|-s	|按协议显示统计信息。默认情况下，会显示TCP、UDP、ICMP和IP协议的统计信息。如果安装了IPv6协议，则会显示基于IPv6的TCP、基于IPv6的UDP、ICMPv6和IPv6协议的统计信息。可使用-p参数指定一组协议。|
-|-r|显示IP路由表。等同于Linux下的-rn|
-|interval|持续监控。等同于Linux下的-c。每隔 interval 秒重新显示所选信息。按 CTRL+C 停止重新显示。如果省略此参数，此命令将仅输出所选信息一次。|
+*(以下为跨平台通用命令，Linux 与 Windows 语法一致)*
+
+| 诊断场景 | 通用推荐命令 | 说明与排查目标 |
+| :--- | :--- | :--- |
+| **核心路由排查** | `netstat -rn` | 打印路由表（加 `-n` 避免反向解析卡顿），排查网关与网段连通性 |
+| **协议错误统计** | `netstat -s` | 输出 IP / ICMP / TCP / UDP 丢包与重传指标，排查网络抖动 |
+
+
+#### **Linux 特有 | Linux Specific**
+
+* `-p` *(Program)* ：显示连接对应的**进程 ID (PID) 和程序名称**（通常需要 `sudo` 权限）。
+* `-l` *(Listening)* ：仅列出处于 **监听（LISTEN）** 状态的套接字。
+* `-t` *(TCP)* ：仅筛选并显示 TCP 相关的连接或监听。
+* `-u` *(UDP)* ：仅筛选并显示 UDP 相关的连接或监听。
+* `-c` *(Continuous)* ：开启持续监控模式，按指定间隔不断刷新输出（按 `Ctrl + C` 终止）。
+* `-i` *(Interfaces)* ：显示网络接口（网卡）的数据包收发、丢包及错误统计信息。
+
+
+
+#### **Windows 特有 | Windows Specific**
+
+* `-o` *(Owning Process)* ：显示与活动连接关联的**进程 PID**（常用于定位端口冲突进程）。
+* `-b` *(Binary)* ：显示创建连接的**可执行程序路径**（需管理员权限，涉及系统托管服务时会打印完整调用链）。
+* `[interval]` *(刷新间隔)* ：在命令最后直接跟整数秒（如 `netstat 5`），让系统每隔指定秒数自动刷新一次。
+* `-p <Protocol>` ：按指定协议过滤连接（如 `tcp`、`udp`、`tcpv6`；与 `-s` 连用时可支持 `icmp`、`ip` 等）。
+* `-e` *(Ethernet)* ：显示以太网统计数据（收发总字节数、单播/非单播数据包数等）。
+* `-f` *(FQDN)* ：对外部远程地址进行强制域名解析，显示完全限定域名。
+* `-q` *(Query)* ：显示所有连接、监听端口，以及**已绑定但未处于监听状态**的 TCP 端口。
+* `-y` ：显示所有连接关联的 TCP 连接模板（仅适用于 TCP 连接）。
 
 
 <!-- ![Parameter](assets/fodder/netstat.webp) -->
 
 
-### 备表 | Remarks
+### **字段说明 | Remarks**
 
-| Parameter      | Description         |
-| -------    | -------      |
-| State           | Indicates the state of a TCP connection, including:<br>CLOSE_WAIT: 对端关了，但本地程序没有 close ( 常见于程序 bug ) .<br>CLOSED:	初始状态，无连接存在.<br>ESTABLISHED: 三次握手完成，连接已建立，双方可正常双向传输数据(全双工).<br>FIN_WAIT_1: 发出 FIN 后等待 ACK，极短暂；若堆积说明对端无响应（网络问题或对端宕机）.<br>FIN_WAIT_2: 收到 ACK 后等待对端 FIN；若大量堆积，说明对端应用有 Bug，未正常关闭连接.<br>LAST_ACK: 发出自己的 FIN 后等待最终 ACK，极短暂.<br>LISTEN: 在监听的端口，等待连接.<br>SYN_RECEIVED: 服务端收到 SYN 并回复 SYN+ACK 后，等待客户端的最终 ACK.<br>SYN_SEND: 客户端发送 SYN 包后，等待服务端回复 SYN+ACK.<br>TIMED_WAIT: 连接关闭后的等待释放 (常见，通常正常) .<br>TIME_WAIT：主动关闭方收到对方 FIN 并发送 ACK 后进入，持续 2MSL（Linux 默认 60 秒），确保对方收到 ACK 且旧报文在网络中消亡。<br>CLOSE_WAIT：被动关闭方收到 FIN 并回复 ACK 后进入，等待应用层调用 close()。如果堆积，说明应用代码有 Bug（忘记关闭连接）。<br>CLOSING：双方几乎同时发送 FIN 时出现的罕见状态。|
-| Proto    | The name of the protocol (TCP or UDP).    |
-| Local address   | The IP address of the local computer and the port number being used. The name of the local computer that corresponds to the IP address and the name of the port is shown unless the -n parameter is specified. If the port is not yet established, the port number is shown as an asterisk (*).  |
-| Foreign address   | The IP address and port number of the remote computer to which the socket is connected. The names that corresponds to the IP address and the port are shown unless the -n parameter is specified. If the port is not yet established, the port number is shown as an asterisk (*).    |
+#### **输出列基础定义 | Output Fields**
 
-## mstsc
+| 字段 (Field) | 含义说明 | 示例与排查要点 |
+| :--- | :--- | :--- |
+| **Proto** | 使用的网络协议 | 通常为 `tcp` 或 `udp` |
+| **Local Address** | 本地 IP 地址与端口号 | 未指定 `-n` 时显示主机名/服务名；`*` 或 `0.0.0.0` 表示监听所有网卡 |
+| **Foreign Address** | 远程对端 IP 地址与端口号 | 与本地建立连接的对端机器；若尚未建立连接则端口显示为 `*` |
+| **State** | TCP 协议的连接状态 | UDP 无连接因此此项为空；TCP 具体状态机分类详解见下方 |
 
-### 远程连接指定主机
 
-``
-mstsc /admin /v:ip
-``
+
+#### **TCP 状态详解 | TCP Connection States**
+
+##### **监听与建立阶段**
+* **`LISTEN`** ：服务端正在监听该端口，等待客户端发起连接。
+* **`SYN_SENT`** ：客户端已发送 `SYN` 建立请求，等待服务端确认回复（若卡住说明网络不通或服务端无响应）。
+* **`SYN_RECEIVED`** ：服务端收到 `SYN` 并回送 `SYN+ACK`，等待客户端最终确认（若大量堆积可能遭受 SYN Flood 攻击）。
+
+##### **正常传输阶段**
+* **`ESTABLISHED`** ：三次握手已完成，双方处于全双工数据传输状态（正常的活跃连接）。
+
+##### **断开与关闭阶段（日常排查核心重点）**
+* **`FIN_WAIT_1`** ：【主动断开方】发出 `FIN` 断开包后等待对方确认，通常极短暂；若堆积说明网络中断或对端宕机。
+* **`FIN_WAIT_2`** ：【主动断开方】收到对端的 `ACK`，等待对端也发出 `FIN`；若大量堆积说明对端程序有 Bug，未正常触发关闭。
+* **`TIME_WAIT`** ：【主动断开方】收到对方 `FIN` 并发送最终 `ACK` 后进入，**持续等待 2MSL（Linux 默认 60 秒）** 以确保旧报文在网络中消亡。属于正常状态，但若量级达到数万会耗尽本地可用临时端口。
+* **`CLOSE_WAIT`** ：【被动断开方】收到对端的断开请求并回复 `ACK`，**等待本地应用层调用 `close()`**。
+
+  >  **高危预警**：若此状态大量堆积，**100% 是本地应用程序存在 Bug（代码忘记关闭 Socket 连接造成泄漏）**。
+  {: .prompt-warning }
+
+* **`LAST_ACK`** ：【被动断开方】本地应用调用关闭后，发出自己的 `FIN` 并等待对方的最后 `ACK`，极短暂。
+* **`CLOSING`** ：双方几乎在同一瞬间同时向对方发送了 `FIN` 包（较罕见）。
+* **`CLOSED`** ：连接彻底终结，无连接存在。
+
+---
+
+## **mstsc | RDP**
+
+* `mstsc /v:<IP[:端口]> [/admin]` ：远程连接主机（加 `/admin` 强行进入管理控制台会话）。
+* `mstsc /v:<IP> /f` ：全屏启动（指定分辨率用 `/w:1920 /h:1080`；跨所有显示器加 `/multimon`）。
+* `mstsc /v:<IP> /prompt` ：强制重新输入账号密码（忽略已保存凭据）。
+* `mstsc <配置.rdp> [/edit]` ：直接按配置连接（加 `/edit` 为编辑配置文件）。
+* `mstsc /shadow:<会话ID> /control` ：影子会话协助（实时查看并接管控制指定桌面）。
+
+---
+
+## **SSH 常用口令速查 | OpenSSH Commands**
+
+*按日常运维使用频率由高到低排序，参数支持空格叠加：*
+
+### **基础连接与登录（核心高频）**
+* `ssh [-p <端口>] <用户>@<IP>` ：连接远程主机（默认 22 端口可省略 `-p`，如 `ssh -p 2222 root@10.0.0.1`）。
+* `ssh -i <私钥路径> [-p <端口>] <用户>@<IP>` ：指定私钥证书文件登录（如连接 AWS/云服务器的 `.pem` 或 `id_rsa`）。
+* `ssh <用户>@<IP> "<执行命令>"` ：不进入交互终端，直接在远程执行命令并返回结果（如 `ssh user@ip "df -h; uptime"`）。
+* `ssh-copy-id [-p <端口>] <用户>@<IP>` ：**【免密神器】** 一键把本地公钥推送到远程服务器，实现后续免密码登录。
+
+
+### **进阶网络穿透与调试（运维高频）**
+* `ssh -J <跳板用户>@<跳板IP> <目标用户>@<目标IP>` ：**【跳板机直连】** 穿透堡垒机/跳板机，一步直达内网目标主机。
+* `ssh -v[vv] <用户>@<IP>` ：详细调试模式（连接卡住或密码报错时用，`-v` 输出排查日志，最多叠加 3 个 `v`）。
+* `ssh -L <本地端口>:<内网IP>:<服务端口> <跳板用户>@<跳板IP>` ：**【本地端口转发】** 通过跳板机将远程内网数据库/服务映射到本地端口访问。
+* `ssh -D <本地端口> <用户>@<IP>` ：**【动态代理】** 在本地指定端口开启一个 SOCKS5 代理通道。
+* `ssh -R <远程端口>:<本地IP>:<本地端口> <用户>@<IP>` ：**【远程端口转发】** 内网穿透，让公网服务器反向访问你本地内网的服务。
+
+
+
+### **后台运行与辅助参数（常搭配隧道叠加使用）**
+* `ssh -N -f -L ...` ：
+  * `-N` ：不执行远程命令（仅建立隧道/端口映射）。
+  * `-f` ：后台静默运行（连接成功后将 SSH 进程丢到后台，不占用当前终端）。
+  * `-L` ：本地端口转发（格式为 `<本地端口>:<目标内网IP>:<目标端口>`，将远程内网服务映射到本地访问）。
+
+  ```
+    公司有一台 MySQL 数据库，内网 IP 是 `192.168.1.50:3306`，**公网无法直接访问**（被防火墙阻拦）。
+    但公司有一台公网跳板机 `1.2.3.4`，允许你通过 SSH 登录。
+  
+    ssh -L 33060:192.168.1.50:3306 root@1.2.3.4
+
+    本地电脑的33060端口和公司内网的3306端口连通,此时可以公网电脑连接数据库
+    地址直接填 **`127.0.0.1`**，端口填 **`33060`**
+  ```
+* `ssh -X` 或 `-Y <用户>@<IP>` ：开启 X11 图形转发（在本地直接弹出远程 Linux 运行的图形界面软件）。
+
+> 免输参数小妙招（等同于 Windows 保存快捷方式）：  
+> 每次输 `-p`、`-i` 和长 IP 很麻烦，可在本地电脑的 `~/.ssh/config` 文件中配置别名：
+>
+> ```ssh-config
+> Host myserver
+>     HostName 192.168.1.100
+>     User root
+>     Port 2222
+>     IdentityFile ~/.ssh/id_rsa
+> ```
+>
+> 保存后，终端直接敲 `ssh myserver` 即可自动带上所有参数一键免密登入。
+{: .prompt-info }
+---
