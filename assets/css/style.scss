@@ -39,3 +39,28 @@ code, kbd, pre, samp {
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.25) !important;
   transition: box-shadow 0.3s ease-in-out !important;
 }
+
+
+/* 隐藏左上角三个点 */
+.code-header::before {
+  display: none !important;
+}
+
+/* 只隐藏代码块标题里的文字（比如 plaintext） */
+.code-header > span,
+.code-header > div > span {
+  display: none !important;
+}
+
+/* 让复制按钮贴到右上角 */
+.code-header {
+  justify-content: flex-end !important;
+}
+
+/* 修复代码块顶部圆角 */
+.highlighter-rouge,
+.highlighter-rouge pre,
+.highlight .highlighter-rouge div {
+  border-top-left-radius: 0.75rem !important;
+  border-top-right-radius: 0.75rem !important;
+}
