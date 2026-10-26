@@ -1,11 +1,10 @@
 ---
 layout: post
 title: Git Push Error
+slug: gitPushError
 date: 2026-08-02 22:56 +0800
 description: 维护博客时出现的各种问题。
 ---
-
-
 ## 回退到目标推送版本
 
 -  直接回退 

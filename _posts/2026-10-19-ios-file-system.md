@@ -1,12 +1,12 @@
 ---
 layout: post
 title: iOS File System
+slug: iosFileSystem
 date: 2026-10-19 10:55 +0800
 description: iOS 文件系统
 tags: [iOS]
 categories: [Technology, Tools]
 ---
-
 # **iOS 文件系统**
 
 49年入国军，千元买个二手果。遂发觉这系统的存储需求，比起安卓那增长的不是一点半点。

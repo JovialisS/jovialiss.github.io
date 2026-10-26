@@ -1,12 +1,12 @@
 ---
 layout: post
 title: MultiAgent Systems
+slug: multiAgentSystems
 date: 2026-09-29 19:57 +0800
 description: 多Agent 系统。
 tags: [AI]
 categories: [Technology, Tools]
 ---
-
 ## Multi-Agent LLM architectures (MAS)
 多智能体系统可以通过Agent间对抗式交流 来深入探索问题 
 比方评估一个技术方案 <br>Agent A 扮演支持者  优势和机会 Agent B扮演反对者 风险和局限

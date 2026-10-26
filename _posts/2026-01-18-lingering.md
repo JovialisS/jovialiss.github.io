@@ -1,13 +1,13 @@
 ---
 layout: post
 title: Lingering
+slug: lingering
 date: 2026-01-18 15:45 +0800
 description: 遐想.
 categories: []
 tags: []
 pin: false
 ---
-
 ## 那些时常在我脑海中萦绕的thinking
 
 我不止一次的在想，人离开这个世界后的事

@@ -1,13 +1,13 @@
 ---
 layout: post
 title: ServerCommand
+slug: serverCommand
 date: 2026-06-08 16:57 +0800
 description: 常用的服务器命令。
 tags: [Server，Command]
 categories: [Technology, Tools]
 pin: true
 ---
-
 ## **修改终端文字大小**
 
 **sudo dpkg-reconfigure console-setup**
@@ -141,10 +141,10 @@ pin: true
 
 
 ### **后台运行与辅助参数（常搭配隧道叠加使用）**
-* `ssh -N -f -L ...` ：
+* `ssh -N -f ...` ：
   * `-N` ：不执行远程命令（仅建立隧道/端口映射）。
   * `-f` ：后台静默运行（连接成功后将 SSH 进程丢到后台，不占用当前终端）。
-  * `-L` ：本地端口转发（格式为 `<本地端口>:<目标内网IP>:<目标端口>`，将远程内网服务映射到本地访问）。
+  
 
   ```
     公司有一台 MySQL 数据库，内网 IP 是 `192.168.1.50:3306`，公网无法直接访问（被防火墙阻拦）。

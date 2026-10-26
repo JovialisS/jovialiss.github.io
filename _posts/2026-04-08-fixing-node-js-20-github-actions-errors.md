@@ -1,13 +1,13 @@
 ---
 layout: post
 title: Fixing Node.js 20 GitHub Actions Errors
+slug: fixNode20Actions
 date: 2026-04-08 22:29 +0800
 description: Github action出错 强制更新node
 categories: [Technology, Github]
 tags: [Github,Action,Node.js]
 pin: false 
 ---
-
 ## Recommended
 
 The Fix (Update to Node 24): Update your workflow to use the latest version of standard actions.

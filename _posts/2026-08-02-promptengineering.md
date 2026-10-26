@@ -1,13 +1,13 @@
 ---
 layout: post
 title: PromptEngineering
+slug: promptEngineering
 date: 2026-07-28 03:33 +0800
 description : 初见AI
 tags: [AI]
 categories: [Technology, Tools]
 # published: false
 ---
-
 ### 角色设定
 
  角色设定是指明确告诉大模型“你是谁”。这不仅仅是简单的角色扮演，其核心目的是限定模型站在特定的专业视角上说话。通过赋予模型具体的身份（如“资深律师”、“科普作者”或“代码审查机器”），可以激活模型内部对应的知识子集，从而引导其采用特定的专业词汇、逻辑框架和表达风格

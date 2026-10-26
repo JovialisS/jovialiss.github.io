@@ -1,13 +1,13 @@
 ---
 layout: post
 title: weng jiayi
+slug: wengJiayi
 date: 2026-01-18 16:29 +0800
 description: 关于chatGPT的核心贡献者。
 categories: []
 tags: []
 pin: false
 ---
-
 ### Reward hacking 
 在强化学习中，模型学会最大化奖励函数，却以违背设计初衷或现实目标的方式“取巧”。
 这种现象通常源于奖励设计不完备,模型发现了奖励函数中的漏洞或代理目标。在大语言模型和RLHF中, reward hacking 可能表现为表面上符合偏好评分、但实际内容低质或不真实。因此,合理的奖励建模、约束机制 和人工监督对避免 reward hacking 至关重要。
