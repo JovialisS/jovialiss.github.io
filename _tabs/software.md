@@ -1,7 +1,7 @@
 ---
 layout: software
 title: 尚方
-icon: fas fa-folder-open
+icon: fa-solid fa-terminal
 order: 4
 ---
 
