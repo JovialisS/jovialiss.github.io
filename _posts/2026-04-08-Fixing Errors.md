@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Fixing Node.js 20 GitHub Actions Errors
-slug: fixNode20Actions
+title: Fixing Errors
+slug: fixErrors
 date: 2026-04-08 22:29 +0800
 description: Github action出错 强制更新node
 categories: [Technology, Github]
@@ -120,3 +120,9 @@ The Fix (Update to Node 24): Update your workflow to use the latest version of s
     }
 
 '''
+
+## 修改透明站点头像
+
+`assets/img/favicons/site.webmanifest` ⇒ `manifest.json`
+
+在`_includes/head.html`、`_includes/favicons.html`这两个文件中找到`site.webmanifest`替换成`manifest.json`.
