@@ -1,8 +1,9 @@
 ---
 # the default layout is 'page'
 icon: fas fa-info-circle
-order: 4
+order: 5
 ---
+
 **AI浪潮下的我对自己的最低要求**
     
 - 可以不会写程序 但拿到代码自己可以改

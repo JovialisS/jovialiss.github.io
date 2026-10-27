@@ -1,0 +1,185 @@
+---
+layout: page
+---
+
+<style>
+  .file-lib {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  /* 顶部操作栏 */
+  .file-lib-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  .file-lib-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tab-btn {
+    border: 1px solid var(--main-border-color, #e9ecef);
+    background: var(--card-bg, #fff);
+    color: var(--text-color, #333);
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+  }
+
+  .tab-btn.active {
+    background: var(--primary-color, #4285f4);
+    color: #fff;
+    border-color: var(--primary-color, #4285f4);
+  }
+
+  .file-lib-search {
+    flex: 1;
+    min-width: 180px;
+    max-width: 260px;
+    padding: 6px 12px;
+    border: 1px solid var(--main-border-color, #e9ecef);
+    border-radius: 6px;
+    background: var(--card-bg, #fff);
+    color: var(--text-color, #333);
+    font-size: 14px;
+  }
+
+  /* 列表容器 */
+  .file-lib-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* 单个文件项（终极版质感） */
+  .file-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    
+    /* 1. 默认状态：完美白底，0.1px 极淡微光描边，无外阴影 */
+    border-radius: 8px !important;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.04) !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+    transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+  }
+
+  /* 2. 悬停状态：高级灰度 + 复合微光阴影（完美还原 Chirpy 质感） */
+  .file-item:hover {
+    /* 极淡的灰度，不偏冷，看起来像高级纸张 */
+    background: #fcfcfc !important;
+    
+    /* 顶部微光描边 + 柔和的悬浮外阴影 */
+    box-shadow: 
+      inset 0 1px 0 rgba(255, 255, 255, 0.8), /* 顶部反光，营造圆润感 */
+      0 4px 12px rgba(0, 0, 0, 0.06),          /* 柔和的背景阴影 */
+      0 1px 3px rgba(0, 0, 0, 0.04) !important; /* 贴近底面的阴影 */
+    
+    /* 模拟微弱的下移（视觉上的物理下沉感，非突兀位移） */
+    border-color: rgba(0, 0, 0, 0.08) !important;
+  }
+
+  /* 内部元素 */
+  .file-icon {
+    width: 24px;
+    text-align: center;
+    color: var(--text-muted-color, #6c757d);
+    font-size: 16px;
+  }
+
+  .file-name {
+    font-weight: 600;
+    min-width: 160px;
+    color: var(--text-color, #333);
+  }
+
+  .file-desc {
+    flex: 1;
+    color: var(--text-muted-color, #6c757d);
+    font-size: 14px;
+  }
+
+  .file-ext {
+    color: var(--text-muted-color, #adb5bd);
+    font-size: 13px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .file-item:hover .file-ext {
+    opacity: 1;
+  }
+</style>
+
+{{ content }}
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var typeMap = {
+    zip: 'fa-file-zipper',
+    pdf: 'fa-file-pdf',
+    doc: 'fa-file-word',
+    xls: 'fa-file-excel',
+    ppt: 'fa-file-powerpoint',
+    exe: 'fa-file-arrow-down',
+    script: 'fa-file-code',
+    text: 'fa-file-lines',
+    image: 'fa-file-image',
+    video: 'fa-file-video',
+    audio: 'fa-file-audio',
+    link: 'fa-link'
+  };
+
+  document.querySelectorAll('.file-item').forEach(function (item) {
+    var type = item.getAttribute('data-type');
+    var icon = item.querySelector('.file-icon');
+    if (type && typeMap[type] && icon) {
+      icon.innerHTML = '<i class="fa-solid ' + typeMap[type] + '"></i>';
+    } else if (icon) {
+      icon.innerHTML = '<i class="fa-solid fa-file"></i>';
+    }
+  });
+
+  var tabs = document.querySelectorAll('.file-lib .tab-btn');
+  var search = document.querySelector('.file-lib-search');
+  var items = document.querySelectorAll('.file-lib .file-item');
+
+  tabs.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      tabs.forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      filter();
+    });
+  });
+
+  if (search) {
+    search.addEventListener('input', filter);
+  }
+
+  function filter() {
+    var cat = document.querySelector('.file-lib .tab-btn.active').dataset.cat;
+    var kw = search.value.toLowerCase();
+    items.forEach(function (el) {
+      var name = el.querySelector('.file-name').textContent.toLowerCase();
+      var desc = el.querySelector('.file-desc').textContent.toLowerCase();
+      var matchCat = cat === 'all' || el.dataset.cat === cat;
+      var matchKw = !kw || name.indexOf(kw) !== -1 || desc.indexOf(kw) !== -1;
+      el.style.display = matchCat && matchKw ? '' : 'none';
+    });
+  }
+});
+</script>
