@@ -231,6 +231,18 @@ order: 4
       <span class="file-ext"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
     </a>
 
+    <a class="file-item" data-cat="base"   href="https://jovial.lanzoue.com/iUKtA4drr8rc" target="_blank" rel="noopener noreferrer">
+      <span class="file-name">迅雷</span>
+      <span class="file-desc"></span>
+      <span class="file-ext"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+    </a>
+
+    <a class="file-item" data-cat="base"   href="https://jovial.lanzoue.com/ibVzU4drp6cd" target="_blank" rel="noopener noreferrer">
+      <span class="file-name">VS Code</span>
+      <span class="file-desc">Win7最后一个能用的版本</span>
+      <span class="file-ext"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+    </a>
+
 
   </div>
 </div>
