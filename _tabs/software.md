@@ -58,7 +58,7 @@ order: 4
 
     <a class="file-item" data-cat="tool"   href="https://jovial.lanzoue.com/iQk6i4dpxqhe" target="_blank" rel="noopener noreferrer">
       <span class="file-name">DiskGenius_Pro</span>
-      <span class="file-desc">Pro_v5.4.3.1342_x86_x64</span>
+      <span class="file-desc">v5.4.3.1342_x86_x64</span>
       <span class="file-ext"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
     </a>
     
