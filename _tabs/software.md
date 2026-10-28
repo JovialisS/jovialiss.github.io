@@ -1,6 +1,5 @@
 ---
 layout: software
-title: 尚方
 icon: fa-solid fa-terminal
 order: 4
 ---
