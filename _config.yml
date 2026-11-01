@@ -229,12 +229,12 @@ exclude:
   - "package*.json"
 
 jekyll-archives:
-  enabled: [categories, tags]
+  enabled: [categories]
   layouts:
     category: category
     tag: tag
   permalinks:
-    tag: /tags/:name/
+    #tag: /tags/:name/
     category: /categories/:name/
 
 
@@ -248,7 +248,7 @@ jekyll_compose:
       # title、date 会由命令自动注入，无需重复写
       slug:
       categories: []          # 分类 (Chirpy 推荐两层: [大类, 小类])
-      tags: []    
+      #tags: []    
       description:   # 文章描述
       hidden: false            # 【隐藏】是否隐藏文章
                 
