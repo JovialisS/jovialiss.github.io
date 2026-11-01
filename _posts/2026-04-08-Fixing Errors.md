@@ -5,7 +5,7 @@ slug: fixErrors
 date: 2026-04-08 22:29 +0800
 description: Github action出错 强制更新node
 categories: [Technology, Github]
-tags: [Github,Action,Node.js]
+tags: [Github,Node.js]
 pin: false 
 ---
 ## Recommended
