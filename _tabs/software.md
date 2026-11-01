@@ -1,8 +1,7 @@
 ---
 layout: software
 icon: fa-solid fa-terminal
-order: 4
----
+order: 2
 
 <div class="file-lib">
 
