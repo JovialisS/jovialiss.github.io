@@ -12,7 +12,7 @@ tabs:
   # format: <filename_without_extension>: <value>
   home: 首页
   categories: 分类
-  tags: 标签
+  # tags: 标签
   archives: 归档
   software: 尚方
   about: 关于
